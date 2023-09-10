@@ -8,6 +8,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import br.com.ignite.enums.TypeUser;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -17,6 +19,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -56,15 +60,37 @@ public class User implements UserDetails {
 	@Column(name = "TYPE")
 	@Enumerated(EnumType.STRING)
 	private TypeUser type;
+
+	// @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
+	// private List<Company> companys;
 	
-	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
-	private List<Company> companys;
+	@ManyToOne
+	@JoinColumn(name = "COMPANY_ID")
+	private Company company;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return List.of(new SimpleGrantedAuthority(type.name()));
-		// throw new UnsupportedOperationException("Unimplemented method 'getAuthorities'");
+		// return List.of(new SimpleGrantedAuthority(type.name()));
+		return null;
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	@Override
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 
 	@Override
 	public String getUsername() {

@@ -16,4 +16,5 @@ public class UserDTO {
 	private String password;
 	private Date dateCreation;
 	private TypeUser type;
+	private Long companyId;
 }

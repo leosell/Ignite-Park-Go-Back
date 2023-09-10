@@ -13,7 +13,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,7 +20,6 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "tb_company")
-@AllArgsConstructor
 public class Company {
 
 	@Id
@@ -74,15 +72,18 @@ public class Company {
 	@Column(name = "CIDADE")
 	private String cidade;
 	
-	@Column(name = "UF", columnDefinition = "TINYINT(2)")
+	@Column(name = "UF", columnDefinition = "CHAR(2)")
 	private String uf;
 
 	@Column(name = "CEP")
 	private String cep;
-	
-	@ManyToOne
-	@JoinColumn(name = "USER_ID")
-	private User users;
+
+	// @ManyToOne
+	// @JoinColumn(name = "COMPANY_ID")
+	// private User users;
+
+	@OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
+	private List<User> users;
 	
 	@OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
 	private List<History> historys;
