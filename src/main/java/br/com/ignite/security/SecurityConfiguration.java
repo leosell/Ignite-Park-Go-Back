@@ -26,6 +26,7 @@ public class SecurityConfiguration {
     	http.cors().and().csrf().disable()
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 		.and().authorizeHttpRequests((authz) -> authz
+				.requestMatchers(HttpMethod.POST, "/company").permitAll()
 				.requestMatchers(HttpMethod.POST, "/login").permitAll()
 				.requestMatchers(HttpMethod.POST, "/").permitAll()
 				.anyRequest().authenticated()

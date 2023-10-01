@@ -2,13 +2,19 @@ package br.com.ignite.dto;
 
 import java.util.Date;
 
+import br.com.ignite.entity.Company;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class CompanyDTO {
 
+	private Long id;
 	private Boolean enabled;
 	private String nomeResponsavel;
 	private String cpfResponsavel;

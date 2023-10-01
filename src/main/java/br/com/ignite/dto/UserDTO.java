@@ -2,6 +2,7 @@ package br.com.ignite.dto;
 
 import java.util.Date;
 
+import br.com.ignite.entity.Company;
 import br.com.ignite.enums.TypeUser;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,5 +17,5 @@ public class UserDTO {
 	private String password;
 	private Date dateCreation;
 	private TypeUser type;
-	private Long companyId;
+	private Company company;
 }

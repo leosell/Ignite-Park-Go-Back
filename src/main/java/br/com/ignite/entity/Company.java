@@ -3,14 +3,14 @@ package br.com.ignite.entity;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -82,7 +82,8 @@ public class Company {
 	// @JoinColumn(name = "COMPANY_ID")
 	// private User users;
 
-	@OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "company")
+	@JsonBackReference
 	private List<User> users;
 	
 	@OneToMany(mappedBy = "company", cascade = CascadeType.ALL)

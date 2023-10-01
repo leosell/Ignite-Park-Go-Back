@@ -5,24 +5,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import javax.management.RuntimeErrorException;
-import javax.naming.AuthenticationException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.server.ResponseStatusException;
 
-import br.com.ignite.entity.Company;
 import br.com.ignite.entity.User;
-import br.com.ignite.repository.CompanyRepository;
 import br.com.ignite.repository.UserRepository;
 
 @Service
@@ -30,15 +20,9 @@ public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
-
-	@Autowired
-	private CompanyRepository companyRepository;
 	
 	@Autowired
 	private TokenJWTService tokenService;
-	
-	@Autowired
-	private AuthenticationManager authManager;
 	
 	public User saveAndFlush(User user) throws Exception {
 		Optional<User> userExists = userRepository.findByEmail(user.getEmail());
